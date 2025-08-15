@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ALU 16-bit Testbench Waveforms</title>
+    <style>
+        body { font-family: monospace; margin: 20px; }
+        .waveform { margin: 10px 0; }
+        .signal-name { display: inline-block; width: 150px; font-weight: bold; }
+        .timeline { display: inline-block; }
+        .time-marker { display: inline-block; width: 60px; text-align: center; border-left: 1px solid #ccc; }
+        .value { display: inline-block; width: 60px; text-align: center; background: #f0f0f0; }
+        .value.changed { background: #ffff99; }
+        h1 { color: #333; }
+        h2 { color: #666; margin-top: 30px; }
+        .test-case { margin: 20px 0; padding: 10px; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <h1>ALU 16-bit Testbench Waveforms</h1>
+    
+    <h2>Signal Values Over Time</h2>
+    <div style="font-size: 12px; margin-bottom: 20px;">
+        Time units: simulation time steps (each test case runs for 10 time units)
+    </div>
+<div class="timeline"><span class="signal-name">Time:</span><span class="time-marker">0</span><span class="time-marker">10</span><span class="time-marker">20</span><span class="time-marker">30</span><span class="time-marker">40</span><span class="time-marker">50</span><span class="time-marker">60</span><span class="time-marker">70</span><span class="time-marker">80</span><span class="time-marker">90</span><span class="time-marker">100</span><span class="time-marker">110</span><span class="time-marker">120</span><span class="time-marker">130</span><span class="time-marker">140</span><span class="time-marker">150</span></div><br/>
+<div class="waveform"><span class="signal-name">a:</span><span class="value changed">x</span><span class="value changed">1234</span><span class="value changed">0</span><span class="value changed">7FFF</span><span class="value changed">5678</span><span class="value changed">ABCD</span><span class="value changed">8000</span><span class="value changed">FFFF</span><span class="value changed">5555</span><span class="value changed">1234</span><span class="value changed">FFFF</span><span class="value">FFFF</span><span class="value changed">2</span><span class="value changed">7FFF</span><span class="value changed">8000</span><span class="value">8000</span></div>
+<div class="waveform"><span class="signal-name">b:</span><span class="value changed">x</span><span class="value changed">5678</span><span class="value changed">0</span><span class="value changed">1</span><span class="value changed">1234</span><span class="value changed">ABCD</span><span class="value changed">1</span><span class="value changed">5555</span><span class="value changed">AAAA</span><span class="value changed">1234</span><span class="value changed">5555</span><span class="value changed">1</span><span class="value">1</span><span class="value changed">0</span><span class="value">0</span><span class="value">0</span></div>
+<div class="waveform"><span class="signal-name">alu_control:</span><span class="value changed">x</span><span class="value changed">0</span><span class="value">0</span><span class="value">0</span><span class="value changed">1</span><span class="value">1</span><span class="value">1</span><span class="value changed">2</span><span class="value changed">3</span><span class="value changed">4</span><span class="value">4</span><span class="value changed">5</span><span class="value">5</span><span class="value changed">0</span><span class="value">0</span><span class="value">0</span></div>
+<div class="waveform"><span class="signal-name">result:</span><span class="value changed">x</span><span class="value changed">68AC</span><span class="value changed">0</span><span class="value changed">8000</span><span class="value changed">4444</span><span class="value changed">0</span><span class="value changed">7FFF</span><span class="value changed">5555</span><span class="value changed">FFFF</span><span class="value changed">0</span><span class="value changed">AAAA</span><span class="value changed">1</span><span class="value changed">0</span><span class="value changed">7FFF</span><span class="value changed">8000</span><span class="value">8000</span></div>
+<div class="waveform"><span class="signal-name">zero:</span><span class="value changed">x</span><span class="value changed">0</span><span class="value changed">1</span><span class="value changed">0</span><span class="value">0</span><span class="value changed">1</span><span class="value changed">0</span><span class="value">0</span><span class="value">0</span><span class="value changed">1</span><span class="value changed">0</span><span class="value">0</span><span class="value changed">1</span><span class="value changed">0</span><span class="value">0</span><span class="value">0</span></div>
+<div class="waveform"><span class="signal-name">overflow:</span><span class="value changed">x</span><span class="value changed">0</span><span class="value">0</span><span class="value changed">1</span><span class="value changed">0</span><span class="value">0</span><span class="value changed">1</span><span class="value changed">0</span><span class="value">0</span><span class="value">0</span><span class="value">0</span><span class="value">0</span><span class="value">0</span><span class="value">0</span><span class="value">0</span><span class="value">0</span></div>
+
+    <h2>Test Case Descriptions</h2>
+    <div class="test-case">
+        <strong>Time 10-20:</strong> ADD positive numbers (0x1234 + 0x5678 = 0x68AC)
+    </div>
+    <div class="test-case">
+        <strong>Time 20-30:</strong> ADD zero result (0x0000 + 0x0000 = 0x0000, Zero=1)
+    </div>
+    <div class="test-case">
+        <strong>Time 30-40:</strong> ADD overflow (0x7FFF + 0x0001 = 0x8000, Overflow=1)
+    </div>
+    <div class="test-case">
+        <strong>Time 40-50:</strong> SUB positive result (0x5678 - 0x1234 = 0x4444)
+    </div>
+    <div class="test-case">
+        <strong>Time 50-60:</strong> SUB zero result (0xABCD - 0xABCD = 0x0000, Zero=1)
+    </div>
+    <div class="test-case">
+        <strong>Time 60-70:</strong> SUB overflow (0x8000 - 0x0001 = 0x7FFF, Overflow=1)
+    </div>
+    <div class="test-case">
+        <strong>Time 70-80:</strong> AND operation (0xFFFF & 0x5555 = 0x5555)
+    </div>
+    <div class="test-case">
+        <strong>Time 80-90:</strong> OR operation (0x5555 | 0xAAAA = 0xFFFF)
+    </div>
+    <div class="test-case">
+        <strong>Time 90-100:</strong> XOR zero result (0x1234 ^ 0x1234 = 0x0000, Zero=1)
+    </div>
+    <div class="test-case">
+        <strong>Time 100-110:</strong> XOR different values (0xFFFF ^ 0x5555 = 0xAAAA)
+    </div>
+    <div class="test-case">
+        <strong>Time 110-120:</strong> SLT A < B signed (-1 < 1, Result=0x0001)
+    </div>
+    <div class="test-case">
+        <strong>Time 120-130:</strong> SLT A >= B signed (2 >= 1, Result=0x0000, Zero=1)
+    </div>
+    <div class="test-case">
+        <strong>Time 130-140:</strong> ADD max positive + zero (0x7FFF + 0x0000 = 0x7FFF)
+    </div>
+    <div class="test-case">
+        <strong>Time 140-150:</strong> ADD max negative + zero (0x8000 + 0x0000 = 0x8000)
+    </div>
+    
+    <h2>Control Signal Encoding</h2>
+    <ul>
+        <li><strong>0x0:</strong> ADD (Addition)</li>
+        <li><strong>0x1:</strong> SUB (Subtraction)</li>
+        <li><strong>0x2:</strong> AND (Bitwise AND)</li>
+        <li><strong>0x3:</strong> OR (Bitwise OR)</li>
+        <li><strong>0x4:</strong> XOR (Bitwise XOR)</li>
+        <li><strong>0x5:</strong> SLT (Set Less Than, signed)</li>
+    </ul>
+    
+</body>
+</html>
